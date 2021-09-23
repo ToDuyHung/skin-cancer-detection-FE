@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'skin-cancer-detection-fe',
+    title: 'Skin Cancer Detection',
     htmlAttrs: {
       lang: 'en'
     },
