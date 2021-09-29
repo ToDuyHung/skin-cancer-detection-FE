@@ -33,8 +33,12 @@ export default {
     },
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       console.log(this.imgBase64)
+      const res = await this.$axios.$post('/predict', {
+        img: this.imgBase64,
+      })
+      console.log(res)
     },
   },
 }
