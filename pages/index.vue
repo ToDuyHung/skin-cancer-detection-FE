@@ -25,6 +25,10 @@ export default {
   },
   watch: {
     file(val) {
+      if (!val) {
+        this.imgBase64 = '#'
+        return
+      }
       const reader = new FileReader()
       reader.readAsDataURL(val)
       reader.onload = (event) => {
@@ -34,11 +38,10 @@ export default {
   },
   methods: {
     async onSubmit() {
-      console.log(this.imgBase64)
       const res = await this.$axios.$post('/predict', {
-        img: this.imgBase64,
+        img: this.imgBase64.split(',')[1],
       })
-      console.log(res)
+      alert(res)
     },
   },
 }
