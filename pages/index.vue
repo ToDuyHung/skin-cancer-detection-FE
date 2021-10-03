@@ -1,48 +1,43 @@
 <template>
   <div>
-    <b-form @submit.prevent="onSubmit">
-      <b-form-file
-        v-model="file"
-        :state="Boolean(file)"
-        placeholder="Choose a file or drop it here..."
-        drop-placeholder="Drop file here..."
-        accept="image/*"
-      ></b-form-file>
-      <b-button type="submit" variant="primary">Submit</b-button>
-    </b-form>
-    <div class="mt-3">Selected file:</div>
-    <b-img id="blah" :src="imgBase64" alt="input img" fluid-grow></b-img>
+    <div class="input-form">
+      <skin-input-form @resultRecieved="onResultRecieved"></skin-input-form>
+    </div>
+    <div class="output">
+      <result-output :result="result"> </result-output>
+    </div>
   </div>
 </template>
 
 <script>
+import ResultOutput from '~/components/ResultOutput.vue'
+import SkinInputForm from '~/components/SkinInputForm.vue'
 export default {
+  components: { SkinInputForm, ResultOutput },
   data() {
     return {
-      file: null,
-      imgBase64: '#',
+      result: '',
     }
   },
-  watch: {
-    file(val) {
-      if (!val) {
-        this.imgBase64 = '#'
-        return
-      }
-      const reader = new FileReader()
-      reader.readAsDataURL(val)
-      reader.onload = (event) => {
-        this.imgBase64 = event.target.result
-      }
-    },
-  },
   methods: {
-    async onSubmit() {
-      const res = await this.$axios.$post('/predict', {
-        img: this.imgBase64.split(',')[1],
-      })
-      alert(res)
+    onResultRecieved(result) {
+      this.result = result
     },
   },
 }
 </script>
+
+<style scoped>
+.input-form {
+  display: block;
+  width: 300px;
+  height: 500px;
+  margin: auto;
+}
+.output {
+  display: block;
+  width: 300px;
+  height: 500px;
+  margin: auto;
+}
+</style>
