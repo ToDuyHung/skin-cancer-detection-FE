@@ -1,5 +1,5 @@
 <template>
-  <b-form @submit.prevent="onSubmit">
+  <b-form @submit.prevent>
     <b-form-group
     id="input-img"
     label="Skin lesion image:"
@@ -15,14 +15,6 @@
     ></b-form-file>
     <img :src="imgBase64" alt="Input Img" height="300" width="300" />
     </b-form-group>
-    <b-button
-      type="submit"
-      variant="info"
-      pill
-      block
-      class="w-50 mx-auto mt-1"
-      >Submit</b-button
-    >
     </div>
   </b-form>
 </template>
@@ -46,14 +38,6 @@ export default {
       reader.onload = (event) => {
         this.imgBase64 = event.target.result
       }
-    },
-  },
-  methods: {
-    async onSubmit() {
-      const res = await this.$axios.$post('/predict', {
-        img: this.imgBase64.split(',')[1],
-      })
-      this.$emit('resultRecieved', res)
     },
   },
 }

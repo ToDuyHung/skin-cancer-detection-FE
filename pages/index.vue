@@ -1,12 +1,11 @@
 <template>
   <div>
-    
-  <div class="input-form">
-        <skin-input-form @resultRecieved="onResultRecieved"></skin-input-form>
-      </div>
-  <div class="output">
-        <result-output @resultRecieved="onResultRecieved"></result-output>
-      </div>
+    <div class="input-form">
+      <skin-input-form></skin-input-form>
+    </div>
+    <div class="output">
+      <result-output @resultRecieved="onResultRecieved"></result-output>
+    </div>
   </div>
 </template>
 
@@ -31,7 +30,7 @@ export default {
 <style scoped>
 .input-form {
   display: block;
-  width: 700px;
+  width: 900px;
   /* height: 500px; */
   margin: auto;
 }
@@ -40,5 +39,6 @@ export default {
   width: 300px;
   height: 500px;
   margin: auto;
+  margin-top: 20px;
 }
 </style>
