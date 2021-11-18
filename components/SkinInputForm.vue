@@ -5,12 +5,18 @@
       <b-row>
         <b-col>
           <div class="img-input-form">
-            <image-input-form></image-input-form>
+            <image-input-form
+              ref="imgForm"
+              @update:img="img = $event"
+            ></image-input-form>
           </div>
         </b-col>
         <b-col>
           <div class="general-form">
-            <general-input-form></general-input-form>
+            <general-input-form
+              ref="clinicalForm"
+              @update:clinical-data="clinicalData = $event"
+            ></general-input-form>
           </div>
         </b-col>
       </b-row>
@@ -32,12 +38,27 @@ import ImageInputForm from '~/components/ImageInputForm.vue'
 import GeneralInputForm from '~/components/GeneralInputForm.vue'
 export default {
   components: { ImageInputForm, GeneralInputForm },
+  data() {
+    return {
+      img: 'default-skin-thumbnail.png',
+      clinicalData: {
+        age: null,
+        gender: 'male',
+        localization: 'abdomen',
+      },
+    }
+  },
   methods: {
     async onSubmit() {
-      const res = await this.$axios.$post('/predict', {
-        img: this.imgBase64.split(',')[1],
-      })
-      this.$emit('resultRecieved', res)
+      if (this.$refs.imgForm.isValid() && this.$refs.clinicalForm.isValid()) {
+        const res = await this.$axios.$post('/predict', {
+          img: this.img.split(',')[1],
+          age: this.clinicalData.age,
+          gender: this.clinicalData.gender,
+          localization: this.clinicalData.localization,
+        })
+        this.$emit('resultRecieved', res)
+      }
     },
   },
 }

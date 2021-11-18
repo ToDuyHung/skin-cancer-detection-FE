@@ -1,16 +1,17 @@
 <template>
-  <b-form @submit.prevent="">
+  <b-form ref="form" @submit.prevent>
     <b-form-group
     id="age"
     label="Age:"
     label-for="input-1">
     <b-form-input
       id="input-1"
-      v-model="age"
+      v-model="form.age"
       type="number"
       min=0
       max=150
       number
+      required
       placeholder="Type age here..."
       style="text-align: left"
     ></b-form-input>
@@ -22,7 +23,7 @@
       label="Gender: ">
       <b-form-radio-group
         id="btn-radios-2"
-        v-model="selected"
+        v-model="form.gender"
         :options="options"
         :aria-describedby="ariaDescribedby"
         button-variant="outline-primary"
@@ -66,8 +67,11 @@
 export default {
   data() {
     return {
-      age: null,
-      selected: 'male',
+      form: {
+        age: null,
+        gender: 'male',
+        localization: 'abdomen',
+      },
       options: [
         { text: 'Male', value: 'male' },
         { text: 'Female', value: 'female' },
@@ -93,21 +97,22 @@ export default {
     }
   },
   watch: {
-    file(val) {
-      if (!val) {
-        this.imgBase64 = 'default-skin-thumbnail.png'
-        return
-      }
-      const reader = new FileReader()
-      reader.readAsDataURL(val)
-      reader.onload = (event) => {
-        this.imgBase64 = event.target.result
-      }
+    localState(val) {
+      this.form.localization = this.localization[val]
+    },
+    form: {
+      handler(val) {
+        this.$emit('update:clinical-data', val)
+      },
+      deep: true,
     },
   },
   methods: {
     onClick(x) {
       this.localState = x
+    },
+    isValid() {
+      return this.$refs.form.reportValidity()
     },
   },
 }

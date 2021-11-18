@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="input-form">
-      <skin-input-form></skin-input-form>
+      <skin-input-form @resultRecieved="onResultRecieved"></skin-input-form>
     </div>
     <div class="output">
-      <result-output @resultRecieved="onResultRecieved"></result-output>
+      <result-output :result="result"></result-output>
     </div>
   </div>
 </template>

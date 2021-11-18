@@ -1,5 +1,5 @@
 <template>
-  <b-form @submit.prevent>
+  <b-form ref="form" @submit.prevent>
     <b-form-group
     id="input-img"
     label="Skin lesion image:"
@@ -12,6 +12,7 @@
       drop-placeholder="Drop file here..."
       accept="image/*"
       style="text-align: left"
+      required
     ></b-form-file>
     <img :src="imgBase64" alt="Input Img" height="300" width="300" />
     </b-form-group>
@@ -37,7 +38,13 @@ export default {
       reader.readAsDataURL(val)
       reader.onload = (event) => {
         this.imgBase64 = event.target.result
+        this.$emit('update:img', this.imgBase64)
       }
+    },
+  },
+  methods: {
+    isValid() {
+      return this.$refs.form.reportValidity()
     },
   },
 }
