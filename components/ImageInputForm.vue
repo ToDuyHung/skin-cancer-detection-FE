@@ -38,6 +38,7 @@ export default {
       reader.readAsDataURL(val)
       reader.onload = (event) => {
         this.imgBase64 = event.target.result
+        console.log(this.imgBase64)
         this.$emit('update:img', this.imgBase64)
       }
     },

@@ -49,6 +49,7 @@ export default {
     }
   },
   methods: {
+    // async
     async onSubmit() {
       if (this.$refs.imgForm.isValid() && this.$refs.clinicalForm.isValid()) {
         const res = await this.$axios.$post('/predict', {
@@ -57,7 +58,9 @@ export default {
           gender: this.clinicalData.gender,
           localization: this.clinicalData.localization,
         })
+        
         this.$emit('resultRecieved', res)
+        // this.$emit('resultRecieved', 'nv')
       }
     },
   },
