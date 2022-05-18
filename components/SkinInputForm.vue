@@ -52,13 +52,16 @@ export default {
     // async
     async onSubmit() {
       if (this.$refs.imgForm.isValid() && this.$refs.clinicalForm.isValid()) {
-        const res = await this.$axios.$post('/predict', {
-          img: this.img.split(',')[1],
-          age: this.clinicalData.age,
-          gender: this.clinicalData.gender,
-          localization: this.clinicalData.localization,
-        })
-        
+        let res = ''
+        try {
+          res = await this.$axios.$post('/predict', {
+            img: this.img.split(',')[1],
+            age: this.clinicalData.age,
+            gender: this.clinicalData.gender,
+            localization: this.clinicalData.localization,
+          })
+        } catch (error) {}
+
         this.$emit('resultRecieved', res)
         // this.$emit('resultRecieved', 'nv')
       }

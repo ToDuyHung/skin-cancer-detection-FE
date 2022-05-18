@@ -3,11 +3,6 @@
     <div class="input-form">
       <skin-input-form @resultRecieved="onResultRecieved"></skin-input-form>
     </div>
-    <div v-if="result != ''" class="output">
-      <skin-output-form :result="result"></skin-output-form>
-      <!-- <result-output :result="result"></result-output>
-      <attention-output :result="result"></attention-output> -->
-    </div>
   </div>
 </template>
 
@@ -15,17 +10,14 @@
 // import ResultOutput from '~/components/ResultOutput.vue'
 // import AttentionOutput from '~/components/AttentionOutput.vue'
 import SkinInputForm from '~/components/SkinInputForm.vue'
-import SkinOutputForm from '~/components/SkinOutputForm.vue'
 export default {
-  components: { SkinInputForm, SkinOutputForm },
-  data() {
-    return {
-      result: '',
-    }
-  },
+  components: { SkinInputForm },
   methods: {
     onResultRecieved(result) {
-      this.result = result
+      this.$router.push({
+        name: 'result',
+        params: { result },
+      })
     },
   },
 }
@@ -37,12 +29,5 @@ export default {
   width: 900px;
   /* height: 500px; */
   margin: auto;
-}
-.output {
-  display: block;
-  width: 900px;
-  height: 500px;
-  margin: auto;
-  margin-top: 20px;
 }
 </style>
