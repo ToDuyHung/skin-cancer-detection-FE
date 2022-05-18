@@ -5,7 +5,7 @@
       <!-- <template #lead> ASBASD </template> -->
       <b-row class="mx-auto">
         <b-col cols="8">
-          <h1 style="font-size: 4em; font-weight: normal">
+          <h1 style="font-size: 3.5em; font-weight: normal">
             Dermatology Aided System
           </h1>
           <p class="info-text">
