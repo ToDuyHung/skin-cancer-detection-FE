@@ -3,7 +3,7 @@
     <div class="input-form">
       <skin-input-form @resultRecieved="onResultRecieved"></skin-input-form>
     </div>
-    <div class="output">
+    <div v-if="result != ''" class="output">
       <skin-output-form :result="result"></skin-output-form>
       <!-- <result-output :result="result"></result-output>
       <attention-output :result="result"></attention-output> -->
@@ -17,7 +17,7 @@
 import SkinInputForm from '~/components/SkinInputForm.vue'
 import SkinOutputForm from '~/components/SkinOutputForm.vue'
 export default {
-  components: { SkinInputForm, SkinOutputForm},
+  components: { SkinInputForm, SkinOutputForm },
   data() {
     return {
       result: '',
