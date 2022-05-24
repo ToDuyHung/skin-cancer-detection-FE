@@ -4,14 +4,12 @@
       <b-row>
         <b-col>
           <div class="result-output">
-            <result-output :result="result"
-            ></result-output>
+            <result-output :result="result"></result-output>
           </div>
         </b-col>
         <b-col>
           <div class="attention-output">
-            <attention-output :result="result"
-            ></attention-output>
+            <attention-output :result="result"></attention-output>
           </div>
         </b-col>
       </b-row>
@@ -27,9 +25,11 @@ export default {
   props: {
     result: {
       type: Array,
-      default: () => {return []},
-    }
-  }
+      default: () => {
+        return []
+      },
+    },
+  },
 }
 </script>
 
